@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ArrozTech — Do Campo ao Prato: site educativo com jogo interativo sobre arroz, tecnologia no campo e sustentabilidade.">
+  <title>ArrozTech — Do Campo ao Prato</title>
+  <link rel="stylesheet" href="style.css?v=14">
+</head>
+<body>
+  <header class="site-header" id="inicio">
+    <div class="container nav-wrap">
+      <a href="#inicio" class="brand">ArrozTech</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">Menu</button>
+      <nav class="main-nav" id="mainNav" aria-label="Navegação principal">
+        <a href="#inicio">Início</a>
+        <a href="#jogo">Jogo</a>
+        <a href="#cultura">Cultura do arroz</a>
+        <a href="#producao">Produção</a>
+        <a href="#sustentabilidade">Sustentabilidade</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <a href="#quiz">Quiz</a>
+        <a href="#referencias">Referências</a>
+        <a href="#sobre">Sobre</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-sky-shape hero-sky-shape-1"></div>
+      <div class="hero-sky-shape hero-sky-shape-2"></div>
+
+      <div class="container hero-content">
+        <p class="hero-tag">Concurso Agrinho 2026 — Programação Front-End</p>
+        <h1>ArrozTech — Do Campo ao Prato</h1>
+        <p class="hero-subtitle">Descubra como cada decisão na lavoura pode aumentar a produtividade, reduzir perdas e proteger o meio ambiente.</p>
+
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#jogo">Jogar agora</a>
+          <a class="btn btn-secondary" href="#cultura">Conhecer o conteúdo</a>
+        </div>
+
+        <p class="hero-theme">
+          Tema Agrinho 2026:
+          <strong>Agro forte, futuro sustentável: equilíbrio entre produção e meio ambiente.</strong>
+        </p>
+
+        <div class="hero-meta">
+          <article class="hero-meta-item">
+            <h3>Foco do projeto</h3>
+            <p>Aprender com contexto real, participação ativa e responsabilidade ambiental.</p>
+          </article>
+          <article class="hero-meta-item">
+            <h3>Tema específico</h3>
+            <p>Da semeadura ao prato: produção de arroz com eficiência, tecnologia e equilíbrio.</p>
+          </article>
+          <article class="hero-meta-item">
+            <h3>Destaque principal</h3>
+            <p>Mini game com missão completa: colher, gerenciar carga, superar lama e entregar resultado.</p>
+          </article>
+        </div>
+      </div>
+
+      <div class="hero-ground">
+        <div class="hero-combine"></div>
+        <div class="hero-grass"></div>
+      </div>
+    </section>
+
+    <section class="section section-brief">
+      <div class="container">
+        <div class="section-head">
+          <h2>Resumo Executivo do Site</h2>
+          <p>Conteúdo direto, visual e aplicado à realidade escolar para transformar informação em aprendizado prático.</p>
+        </div>
+        <div class="summary-grid">
+          <article class="summary-card">
+            <h3>Objetivo</h3>
+            <p>Mostrar que produtividade e sustentabilidade podem caminhar juntas quando há planejamento e tecnologia.</p>
+          </article>
+          <article class="summary-card">
+            <h3>Como o site ensina</h3>
+            <p>Com jogo, linha do tempo e quiz, o aluno aprende, pratica e fixa o conteúdo com mais facilidade.</p>
+          </article>
+          <article class="summary-card">
+            <h3>Competências trabalhadas</h3>
+            <p>Desenvolve leitura crítica, tomada de decisão, visão sistêmica e consciência socioambiental.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section game-section" id="jogo">
+      <div class="container">
+        <div class="section-head">
+          <h2>Missão Colheita</h2>
+          <p>Colha o arroz, descarregue no caminhão e evite a lama.</p>
+        </div>
+
+        <div class="game-controls">
+          <button class="btn btn-primary" id="startBtn" type="button">Iniciar</button>
+          <button class="btn btn-secondary" id="pauseBtn" type="button">Pausar</button>
+          <button class="btn btn-secondary" id="restartBtn" type="button">Reiniciar</button>
+          <button class="btn btn-outline" id="instructionsBtn" type="button">Ver instruções</button>
+        </div>
+
+        <div class="hud-grid" aria-live="polite">
+          <div class="hud-item"><span>Tempo</span><strong id="hudTempo">--</strong></div>
+          <div class="hud-item"><span>Clima</span><strong id="hudFase">Céu limpo</strong></div>
+          <div class="hud-item"><span>Sacas</span><strong id="hudSacas">0</strong></div>
+          <div class="hud-item"><span>Pontuação</span><strong id="hudPontuacao">0</strong></div>
+          <div class="hud-item"><span>Tipo do lote</span><strong id="hudCombustivel">Tipo 1 (100)</strong></div>
+          <div class="hud-item"><span>Vida</span><strong id="hudVida">100%</strong></div>
+          <div class="hud-item"><span>Sustentabilidade</span><strong id="hudSustentabilidade">100%</strong></div>
+          <div class="hud-item"><span>Eficiência</span><strong id="hudEficiencia">100%</strong></div>
+        </div>
+
+        <div class="phase-objective" id="phaseObjective">
+          Objetivo: colher e descarregar antes do tempo acabar.
+        </div>
+
+        <div class="game-board-wrap">
+          <canvas id="gameCanvas" width="920" height="520" aria-label="Área do jogo Missão Colheita"></canvas>
+        </div>
+
+        <div class="touch-controls" aria-label="Controles para celular">
+          <button class="touch-btn" data-key="ArrowUp" aria-label="Mover para cima">&#8593;</button>
+          <button class="touch-btn" data-key="ArrowLeft" aria-label="Mover para esquerda">&#8592;</button>
+          <button class="touch-btn" data-key="ArrowDown" aria-label="Mover para baixo">&#8595;</button>
+          <button class="touch-btn" data-key="ArrowRight" aria-label="Mover para direita">&#8594;</button>
+        </div>
+
+        <div class="game-status-strip" aria-live="polite">
+          <p><strong>Dica:</strong> <span id="educationalMessage">Prepare a colheita.</span></p>
+          <p><strong>Última ação:</strong> <span id="diaryList">Nenhuma ação registrada.</span></p>
+        </div>
+
+        <div class="result-panel hidden" id="resultPanel" aria-live="polite">
+          <h3>Resultado da colheita</h3>
+          <div class="result-summary">
+            <p><strong>Entregues</strong><span id="resultEntregue">0 sacas</span></p>
+            <p><strong>Lucro estimado</strong><span id="resultLucro">R$ 0,00</span></p>
+            <p><strong>Pontuação</strong><span id="resultPontos">0</span></p>
+            <p><strong>Classificação</strong><span id="resultClassificacao">--</span></p>
+          </div>
+          <p class="result-note">Cotação usada: arroz agulhinha em casca, R$ 78,63/sc (01/06/2026).</p>
+          <span class="hidden" id="resultSacas">0</span>
+          <span class="hidden" id="resultVida">0%</span>
+          <span class="hidden" id="resultSustentabilidade">0%</span>
+          <span class="hidden" id="resultCombustivel">Tipo 1 (100/100)</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cultura">
+      <div class="container">
+        <div class="section-head">
+          <h2>A cultura do arroz</h2>
+          <p>Mais que um alimento, o arroz representa segurança alimentar, geração de renda e integração entre campo e cidade.</p>
+        </div>
+        <div class="two-col">
+          <article class="text-card">
+            <h3>Importância social e alimentar</h3>
+            <p>Presente diariamente na mesa brasileira, o arroz é essencial para nutrição, estabilidade de abastecimento e cultura alimentar.</p>
+            <p>Quando a cadeia produtiva é eficiente, o consumidor recebe alimento de qualidade com mais regularidade e melhor custo-benefício.</p>
+          </article>
+          <article class="text-card">
+            <h3>Relação entre campo e cidade</h3>
+            <p>Do preparo do solo ao mercado, cada etapa exige conhecimento técnico, logística e decisão estratégica.</p>
+            <p>Fortalecer a produção rural valoriza comunidades locais, gera emprego e abre oportunidades para novas gerações no agro.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="producao">
+      <div class="container">
+        <div class="section-head">
+          <h2>Etapas da produção do arroz</h2>
+          <p>Navegue pelas 8 etapas da cadeia produtiva em um painel interativo com foco em qualidade, eficiência e resultado.</p>
+        </div>
+        <div class="production-interactive" id="productionInteractive">
+          <div class="production-steps" role="tablist" aria-label="Etapas da produção do arroz">
+            <button class="production-step active" type="button" data-step="0" aria-selected="true">
+              <span>1</span>
+              <div><strong>Preparo do solo</strong><small>Base da produtividade</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="1" aria-selected="false">
+              <span>2</span>
+              <div><strong>Plantio</strong><small>Início da safra</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="2" aria-selected="false">
+              <span>3</span>
+              <div><strong>Irrigação</strong><small>Gestão da água</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="3" aria-selected="false">
+              <span>4</span>
+              <div><strong>Crescimento</strong><small>Monitoramento técnico</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="4" aria-selected="false">
+              <span>5</span>
+              <div><strong>Colheita</strong><small>Ponto ideal do grão</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="5" aria-selected="false">
+              <span>6</span>
+              <div><strong>Secagem</strong><small>Controle de umidade</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="6" aria-selected="false">
+              <span>7</span>
+              <div><strong>Beneficiamento</strong><small>Padrão de qualidade</small></div>
+            </button>
+            <button class="production-step" type="button" data-step="7" aria-selected="false">
+              <span>8</span>
+              <div><strong>Distribuição</strong><small>Campo ao consumidor</small></div>
+            </button>
+          </div>
+
+          <article class="production-panel" aria-live="polite">
+            <p class="production-index" id="prodIndex">Etapa 1 de 8</p>
+            <h3 id="prodTitle">Preparo do solo</h3>
+            <p id="prodDescription">Diagnóstico da área, correção e estruturação para iniciar a safra com base técnica.</p>
+            <ul class="production-points" id="prodPoints">
+              <li>Análise física e química do solo para tomada de decisão.</li>
+              <li>Correção e nivelamento para melhor desempenho operacional.</li>
+              <li>Planejamento da safra para reduzir risco e desperdício.</li>
+            </ul>
+            <div class="production-controls">
+              <button class="btn btn-outline" id="prodPrev" type="button">Etapa anterior</button>
+              <button class="btn btn-secondary" id="prodNext" type="button">Próxima etapa</button>
+            </div>
+            <div class="production-progress-track" aria-hidden="true">
+              <div class="production-progress-fill" id="prodProgress"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sustentabilidade">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sustentabilidade na lavoura</h2>
+          <p>Alta produtividade só se sustenta com conservação ambiental, manejo responsável e visão de longo prazo.</p>
+        </div>
+        <div class="card-grid">
+          <article class="topic-card"><h3>Uso consciente da água</h3><p>Irrigação precisa reduz perdas, protege mananciais e sustenta a produção.</p></article>
+          <article class="topic-card"><h3>Cuidado com o solo</h3><p>Solo bem manejado garante fertilidade, estabilidade e maior retorno por área.</p></article>
+          <article class="topic-card"><h3>Preservação de nascentes</h3><p>Nascentes protegidas significam água de melhor qualidade para hoje e para o futuro.</p></article>
+          <article class="topic-card"><h3>Redução de desperdícios</h3><p>Planejamento e colheita no ponto certo aumentam aproveitamento e rentabilidade.</p></article>
+          <article class="topic-card"><h3>Proteção da biodiversidade</h3><p>Ecossistemas equilibrados fortalecem o campo e reduzem riscos ambientais.</p></article>
+          <article class="topic-card"><h3>Mecanização responsável</h3><p>Operação segura e manutenção preventiva elevam desempenho e vida útil das máquinas.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="tecnologia">
+      <div class="container">
+        <div class="section-head">
+          <h2>Tecnologia no campo</h2>
+          <p>Tecnologia aplicada transforma dados em decisão, reduz custos e melhora o resultado da lavoura.</p>
+        </div>
+        <div class="card-grid">
+          <article class="topic-card"><h3>Sensores</h3><p>Dados de solo e umidade em tempo real para decisão rápida e precisa.</p></article>
+          <article class="topic-card"><h3>Drones</h3><p>Visão aérea detalhada para detectar falhas, riscos e oportunidades na área.</p></article>
+          <article class="topic-card"><h3>GPS agrícola</h3><p>Navegação exata para reduzir sobreposição, erro operacional e desperdício.</p></article>
+          <article class="topic-card"><h3>Colheitadeiras modernas</h3><p>Mais capacidade de trabalho com menor perda de grãos na operação.</p></article>
+          <article class="topic-card"><h3>Monitoramento climático</h3><p>Antecipação de cenários para proteger a safra e melhorar o planejamento.</p></article>
+          <article class="topic-card"><h3>Agricultura de precisão</h3><p>Integração de dados para produzir mais, gastar melhor e impactar menos.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="quiz">
+      <div class="container">
+        <div class="section-head">
+          <h2>Quiz final</h2>
+          <p>Teste seu conhecimento e descubra seu nível de preparo para uma produção agrícola consciente e eficiente.</p>
+        </div>
+        <div class="quiz-box">
+          <button class="btn btn-primary" id="startQuizBtn" type="button">Iniciar quiz</button>
+          <div id="quizContent" class="quiz-content hidden">
+            <p id="quizProgress">Pergunta 1 de 6</p>
+            <h3 id="quizQuestion">Pergunta</h3>
+            <div id="quizOptions" class="quiz-options"></div>
+            <p id="quizFeedback" class="quiz-feedback"></p>
+            <button class="btn btn-secondary hidden" id="nextQuestionBtn" type="button">Próxima pergunta</button>
+          </div>
+          <div id="quizResult" class="quiz-result hidden" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt-section" id="sobre">
+      <div class="container">
+        <div class="section-head">
+          <h2>Sobre o projeto</h2>
+          <p>Projeto escolar voltado a mostrar, na prática, como produtividade e preservação podem avançar lado a lado.</p>
+        </div>
+
+        <div class="about-grid">
+          <article class="about-card">
+            <h3>Dados institucionais</h3>
+            <ul class="project-data">
+              <li><strong>Aluno:</strong> Luiz Ricardo Woruby</li>
+              <li><strong>Escola:</strong> Colégio Imperatriz Teresa Cristina</li>
+              <li><strong>Cidade:</strong> Cândido de Abreu - PR</li>
+              <li><strong>Professor orientador:</strong> Vinicius Ivachuka</li>
+              <li><strong>Concurso:</strong> Agrinho 2026</li>
+            </ul>
+          </article>
+          <article class="about-card">
+            <h3>Proposta pedagógica</h3>
+            <p>O site integra linguagem didática e experiência interativa para aproximar estudantes da realidade do agro contemporâneo.</p>
+            <p>Com mini game e seções formativas, o projeto reforça que produzir com excelência exige estratégia, inovação e responsabilidade ambiental.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="references-section" id="referencias">
+      <div class="container references-minimal">
+        <h2>Referências</h2>
+        <p class="references-intro">Fontes consultadas para dados, imagens e conteúdo educativo do projeto.</p>
+
+        <ul class="references-list">
+          <li><a href="https://www.noticiasagricolas.com.br/cotacoes/arroz" target="_blank" rel="noopener">Notícias Agrícolas</a><span>Cotação do arroz agulhinha em casca: R$ 78,63/sc, atualizada em 01/06/2026.</span></li>
+          <li><a href="https://www.revistacultivar.com.br/" target="_blank" rel="noopener">Revista Cultivar</a><span>Fonte informada para a imagem de capa da colheitadeira.</span></li>
+          <li><a href="https://chatgpt.com/" target="_blank" rel="noopener">ChatGPT</a><span>Imagens do jogo geradas com apoio da ferramenta.</span></li>
+          <li><a href="https://www.embrapa.br/agencia-de-informacao-tecnologica/cultivos/arroz/producao/sistema-de-cultivo/arroz-irrigado-na-regiao-subtropical/irrigacao-e-drenagem" target="_blank" rel="noopener">Embrapa</a><span>Informações técnicas sobre produção, irrigação e manejo do arroz.</span></li>
+          <li><a href="https://www.gov.br/ana/pt-br/assuntos/gestao-das-aguas/usos-da-agua/irrigacao" target="_blank" rel="noopener">ANA</a><span>Conteúdo sobre irrigação e uso da água na agricultura.</span></li>
+          <li><a href="https://www.gov.br/conab/pt-br/assuntos/noticias/producao-de-graos-atinge-novo-recorde-com-350-2-milhoes-de-toneladas-colhidas-na-safra-2024-25" target="_blank" rel="noopener">Conab</a><span>Dados sobre produção nacional de grãos, incluindo arroz.</span></li>
+          <li><a href="https://www.gov.br/saude/pt-br/assuntos/saude-brasil/eu-quero-me-alimentar-melhor/noticias/2021/comidas-que-dao-match-arroz-e-feijao" target="_blank" rel="noopener">Ministério da Saúde</a><span>Referência sobre o arroz na alimentação brasileira.</span></li>
+        </ul>
+
+        <p class="references-note">Conteúdo adaptado em linguagem escolar para fins educativos no Concurso Agrinho 2026.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>ArrozTech — Do Campo ao Prato | Concurso Agrinho 2026</p>
+    </div>
+  </footer>
+
+  <dialog id="instructionsModal">
+    <h3>Como jogar</h3>
+    <ul>
+      <li>Use setas do teclado ou teclas W, A, S e D para mover a colheitadeira.</li>
+      <li>No celular, use os botões direcionais abaixo do jogo.</li>
+      <li>Colete arroz maduro para encher a carga da máquina.</li>
+      <li>Quando a carga estiver cheia, aproxime-se do caminhão na lateral esquerda para descarregar.</li>
+      <li>No meio da partida chega uma chuva intensa sobre o campo.</li>
+      <li>Depois da chuva, surgem duas áreas de lama em posições aleatórias.</li>
+      <li>Não entre na lama: se ficar 5 segundos dentro dela, a máquina encalha e a missão termina.</li>
+      <li>Pedras e galhos somem quando a máquina passa por cima.</li>
+      <li>A qualidade do lote (Tipo 1 ao Tipo 5) depende de vida da máquina, lama e tempo de colheita.</li>
+      <li>Aproveite os 50 segundos para colher e entregar o máximo possível.</li>
+    </ul>
+    <button class="btn btn-primary" id="closeInstructionsBtn" type="button">Fechar</button>
+  </dialog>
+
+  <script src="script.js?v=21"></script>
+</body>
+</html>
